@@ -40,6 +40,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="HsU-y4-DWc" id="Tcz-KV-Gh5"/>
+                                    <outlet property="delegate" destination="HsU-y4-DWc" id="G7f-is-QJq"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -55,6 +59,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LRg-YF-Pxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-222" y="-273"/>
+        </scene>
+        <!--Meme Collection View Controller-->
+        <scene sceneID="WY1-Mz-qcg">
+            <objects>
+                <viewController id="oqU-XO-KW6" userLabel="Meme Collection View Controller" customClass="MemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QFC-F7-cFK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="39d-8g-D9c">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dhs-cg-Xve">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="itemReuseIdentifier" id="Pnd-vj-xZa">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="oqU-XO-KW6" id="PSA-3T-Kjs"/>
+                                    <outlet property="delegate" destination="oqU-XO-KW6" id="D4j-s4-2B6"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="39d-8g-D9c" firstAttribute="top" secondItem="4Un-GW-t9y" secondAttribute="top" id="CcV-Rt-VR9"/>
+                            <constraint firstItem="39d-8g-D9c" firstAttribute="bottom" secondItem="4Un-GW-t9y" secondAttribute="bottom" id="Fsc-PM-g7B"/>
+                            <constraint firstItem="39d-8g-D9c" firstAttribute="leading" secondItem="4Un-GW-t9y" secondAttribute="leading" id="VoZ-EH-cEY"/>
+                            <constraint firstItem="39d-8g-D9c" firstAttribute="trailing" secondItem="4Un-GW-t9y" secondAttribute="trailing" id="wgS-8V-EwG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4Un-GW-t9y"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4I5-4E-UOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-223.18840579710147" y="401.78571428571428"/>
         </scene>
         <!--Meme Editor View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -161,6 +212,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="643" y="58"/>
         </scene>
     </scenes>
 </document>
