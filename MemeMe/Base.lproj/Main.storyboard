@@ -14,7 +14,7 @@
         <scene sceneID="n0M-8f-XQp">
             <objects>
                 <navigationController id="zku-F5-ipk" userLabel="Table Navigation Controller" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="hau-6R-CWN"/>
+                    <tabBarItem key="tabBarItem" title="" image="table" selectedImage="table" id="hau-6R-CWN"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="R7j-Xs-cgk">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -272,7 +272,7 @@
         <scene sceneID="WoS-vd-lW3">
             <objects>
                 <navigationController id="gxJ-qL-gMX" userLabel="Collection Navigation Controller" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="r7Y-xR-HEn"/>
+                    <tabBarItem key="tabBarItem" title="" image="collection" selectedImage="collection" id="r7Y-xR-HEn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nvc-E7-OpP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -286,4 +286,8 @@
             <point key="canvasLocation" x="-1100" y="402"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="collection" width="30" height="30.5"/>
+        <image name="table" width="30" height="30"/>
+    </resources>
 </document>
