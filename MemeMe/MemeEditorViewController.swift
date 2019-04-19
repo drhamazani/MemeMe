@@ -77,13 +77,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: Declaring viewWillAppear Function
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
     }
     
     // MARK: Declaring viewWillDisappear Function
     override func viewWillDisappear(_ animated: Bool) {
-        
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
@@ -176,6 +179,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             }
             
             self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -186,6 +190,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         bottomTextFieldEdited = false
         imagePickerView.image = nil
         shareButton.isEnabled = false
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     

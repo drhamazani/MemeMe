@@ -21,6 +21,7 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMeme))
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
         self.collectionView.reloadData()
