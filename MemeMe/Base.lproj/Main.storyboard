@@ -72,7 +72,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dbc-v3-kFd"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mUZ-al-psX"/>
+                    <navigationItem key="navigationItem" id="mUZ-al-psX">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="qIx-a7-Dyp"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LRg-YF-Pxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -137,7 +139,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Un-GW-t9y"/>
                     </view>
-                    <navigationItem key="navigationItem" id="God-PI-KCp"/>
+                    <navigationItem key="navigationItem" id="God-PI-KCp">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="EmK-6g-LLM"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="f4E-rx-ejN"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4I5-4E-UOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -23,11 +23,21 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        return appDelegate.memes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: "rowReuseIdentifier")!
+        let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
+        
+        // Set the texts and image
+        cell.textLabel?.text = meme.topText + ", " + meme.bottomText
+        cell.imageView?.image = meme.memedImage
+        
         return cell
     }
 
