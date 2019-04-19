@@ -73,8 +73,17 @@
                         <viewLayoutGuide key="safeArea" id="dbc-v3-kFd"/>
                     </view>
                     <navigationItem key="navigationItem" id="mUZ-al-psX">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="qIx-a7-Dyp"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="0D7-Z7-GYW">
+                            <connections>
+                                <action selector="editTable:" destination="HsU-y4-DWc" id="Mcj-cK-PhF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qIx-a7-Dyp"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editButton" destination="0D7-Z7-GYW" id="u5Y-VG-Zse"/>
+                        <outlet property="tableView" destination="op2-yl-ZQV" id="80z-cs-Itl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LRg-YF-Pxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -140,9 +149,17 @@
                         <viewLayoutGuide key="safeArea" id="4Un-GW-t9y"/>
                     </view>
                     <navigationItem key="navigationItem" id="God-PI-KCp">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="EmK-6g-LLM"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="f4E-rx-ejN"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="EmK-6g-LLM">
+                            <connections>
+                                <action selector="editCollection:" destination="oqU-XO-KW6" id="6oh-HY-Am6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="f4E-rx-ejN"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="39d-8g-D9c" id="u0G-pP-PPm"/>
+                        <outlet property="editButton" destination="EmK-6g-LLM" id="M2A-wl-Nqd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4I5-4E-UOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -151,7 +168,7 @@
         <!--Meme Editor View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeEditorViewController" id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
