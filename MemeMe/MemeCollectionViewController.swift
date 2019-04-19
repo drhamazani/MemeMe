@@ -17,11 +17,27 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        return appDelegate.memes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemReuseIdentifier", for: indexPath)  as! MemeCollectionViewCell
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemReuseIdentifier", for: indexPath) as! MemeCollectionViewCell
+        let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
+        
+        // Set the image
+        
+        cell.collectionImage.image = meme.memedImage
+        if self.editButton.title == "Edit" {
+            cell.collectionImage.alpha = 1
+        } else {
+            cell.collectionImage.alpha = 0.4
+        }
+        
+        
         return cell
     }
     
