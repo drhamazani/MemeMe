@@ -73,10 +73,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         shareButton.isEnabled = false
         textAttribute(textField: topTextField)
         textAttribute(textField: bottomTextField)
+        navBar.alpha = 0.6
+        toolBar.alpha = 0.6
     }
     
     // MARK: Declaring viewWillAppear Function
     override func viewWillAppear(_ animated: Bool) {
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapDetected))
+        imagePickerView.isUserInteractionEnabled = true
+        imagePickerView.addGestureRecognizer(singleTap)
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -225,5 +230,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         appDelegate.memes.append(meme)
     }
     
+    @objc func tapDetected() {
+        navBar.isHidden = navBar.isHidden ? false : true
+        toolBar.isHidden = navBar.isHidden
+    }
 
 }
