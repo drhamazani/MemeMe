@@ -78,6 +78,37 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+//        let object = UIApplication.shared.delegate
+//        let appDelegate = object as! AppDelegate
+//        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+//        detailController.meme = appDelegate.memes[(indexPath as NSIndexPath).row]
+        
+        if let currentCell = tableView.cellForRow(at: indexPath) as? MemeTableViewCell {
+            if self.editButton.title == "Edit" {
+                print("Navigate to MemeDetailViewController")
+//                self.navigationController!.pushViewController(detailController, animated: true)
+                
+            } else {
+                if currentCell.alpha != 1 {
+                    print("alpha == 0.4")
+                    if !(rowsSelected.contains(indexPath)) {
+                        rowsSelected.append(indexPath)
+                        currentCell.alpha = 1
+                    }
+                } else {
+                    print("alpha == 1")
+                    if (rowsSelected.contains(indexPath)) {
+                        let foundIndex = rowsSelected.firstIndex(of: indexPath)
+                        rowsSelected.remove(at: foundIndex!)
+                        currentCell.alpha = 0.4
+                    }
+                }
+            }
+        }
+    }
 
     @IBAction func editTable(_ sender: Any) {
         if self.editButton.title == "Edit" {
