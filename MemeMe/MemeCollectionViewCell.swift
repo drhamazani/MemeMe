@@ -12,4 +12,12 @@ class MemeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var collectionImage: UIImageView!
     
+    func setCell(meme: Meme) {
+        self.collectionImage.image = meme.memedImage
+    }
+    
+    func setAlpha(alpha: CGFloat) {
+        self.collectionImage.alpha = alpha
+    }
+    
 }

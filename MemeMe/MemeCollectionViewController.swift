@@ -68,12 +68,12 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
         
         // Set the image
+        cell.setCell(meme: meme)
         
-        cell.collectionImage.image = meme.memedImage
         if self.editButton.title == "Edit" {
-            cell.collectionImage.alpha = 1
+            cell.setAlpha(alpha: 1)
         } else {
-            cell.collectionImage.alpha = 0.4
+            cell.setAlpha(alpha: 0.4)
         }
         
         
