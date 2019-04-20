@@ -181,10 +181,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             
             if success {
                 self.save()
+                self.navigationController?.popToRootViewController(animated: true)
             }
             
             self.dismiss(animated: true, completion: nil)
-            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
