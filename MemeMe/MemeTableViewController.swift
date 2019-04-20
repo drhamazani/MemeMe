@@ -27,7 +27,15 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMeme))
+        if appDelegate.memes.count == 0 {
+            self.editButton.isEnabled = false
+        } else {
+            self.editButton.isEnabled = true
+        }
         tableView.reloadData()
     }
     
