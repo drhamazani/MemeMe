@@ -12,12 +12,26 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     var itemsSelected = [IndexPath]()
     var memes: [Meme]! {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
+    }
+    
+    override func viewDidLoad() {
+        if #available(iOS 11.0, *) {
+            collectionView?.contentInsetAdjustmentBehavior = .always
+        }
+        
+        let space:CGFloat = 2.0
+        let dimensionWidth = (view.frame.size.width - (2 * space)) / 3.0
+        let dimensionHeight = (view.frame.size.height - 40 - (5 * space)) / 6.0
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: dimensionWidth, height: dimensionHeight)
     }
     
     override func viewWillAppear(_ animated: Bool) {
