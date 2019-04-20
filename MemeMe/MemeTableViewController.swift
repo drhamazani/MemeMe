@@ -81,15 +81,14 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        let object = UIApplication.shared.delegate
-//        let appDelegate = object as! AppDelegate
-//        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
-//        detailController.meme = appDelegate.memes[(indexPath as NSIndexPath).row]
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+        detailController.meme = appDelegate.memes[(indexPath as NSIndexPath).row]
         
         if let currentCell = tableView.cellForRow(at: indexPath) as? MemeTableViewCell {
             if self.editButton.title == "Edit" {
-                print("Navigate to MemeDetailViewController")
-//                self.navigationController!.pushViewController(detailController, animated: true)
+                self.navigationController!.pushViewController(detailController, animated: true)
                 
             } else {
                 if currentCell.alpha != 1 {
