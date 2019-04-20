@@ -88,6 +88,36 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath) {
+        
+//        let object = UIApplication.shared.delegate
+//        let appDelegate = object as! AppDelegate
+//        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+//        detailController.meme = appDelegate.memes[(indexPath as NSIndexPath).row]
+        
+        if let currentCell = collectionView.cellForItem(at: indexPath) as? MemeCollectionViewCell {
+            if self.editButton.title == "Edit" {
+                print("Navigate to MemeDetailViewController")
+//                self.navigationController!.pushViewController(detailController, animated: true)
+                
+            } else {
+                if currentCell.collectionImage.alpha != 1 {
+                    print(indexPath.row)
+                    if !(itemsSelected.contains(indexPath)) {
+                        itemsSelected.append(indexPath)
+                        currentCell.collectionImage.alpha = 1
+                    }
+                } else {
+                    if (itemsSelected.contains(indexPath)) {
+                        let foundIndex = itemsSelected.firstIndex(of: indexPath)
+                        itemsSelected.remove(at: foundIndex!)
+                        currentCell.collectionImage.alpha = 0.4
+                    }
+                }
+            }
+        }
+    }
+    
     @IBAction func editCollection(_ sender: Any) {
         if self.editButton.title == "Edit" {
             self.editButton.title = "Done"
