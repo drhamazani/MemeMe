@@ -108,6 +108,21 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        
+        if (editingStyle == .delete) {
+            appDelegate.memes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
+            self.editButton.isEnabled = appDelegate.memes.count == 0 ? false : true
+        }
+    }
 
     @IBAction func editTable(_ sender: Any) {
         if self.editButton.title == "Edit" {
@@ -136,6 +151,7 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.editButton.title = "Edit"
         self.rowsSelected = []
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        self.editButton.isEnabled = appDelegate.memes.count == 0 ? false : true
         selectRows()
     }
     
