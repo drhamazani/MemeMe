@@ -70,6 +70,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         topTextField.delegate = self
         bottomTextField.delegate = self
         imagePickerView.backgroundColor = .black
+        imagePickerView.contentMode = .scaleAspectFit
+        imagePickerView.clipsToBounds = true
         shareButton.isEnabled = false
         textAttribute(textField: topTextField)
         textAttribute(textField: bottomTextField)
@@ -207,10 +209,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         toolBar.isHidden = true
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        self.imagePickerView.frame.origin.y -= view.safeAreaInsets.top
+        self.topTextField.frame.origin.y -= view.safeAreaInsets.top
+        self.bottomTextField.frame.origin.y -= view.safeAreaInsets.top
+        UIGraphicsBeginImageContext(self.imagePickerView.frame.size)
+        //        view.frame.origin.y -= view.safeAreaInsets.top
+        imagePickerView.drawHierarchy(in: self.imagePickerView.frame, afterScreenUpdates: true)
+        topTextField.drawHierarchy(in: self.topTextField.frame, afterScreenUpdates: true)
+        bottomTextField.drawHierarchy(in: self.bottomTextField.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        //        view.frame.origin.y = 0
+        self.imagePickerView.frame.origin.y = 0
+        self.topTextField.frame.origin.y = 0
+        self.bottomTextField.frame.origin.y = 0
         
         // Show toolbar and navbar
         navBar.isHidden = false
