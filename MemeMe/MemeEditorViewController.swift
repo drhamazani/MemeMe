@@ -20,6 +20,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var toolBar: UIToolbar!
     var topTextFieldEdited = false
     var bottomTextFieldEdited = false
+    var meme: Meme!
     
     // MARK: Text Attributes
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
@@ -59,7 +60,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func textAttribute(textField: UITextField) {
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = .center
-        textField.text = textField == topTextField ? "TOP" : "BOTTOM"
+        if meme != nil {
+            textField.text = textField == topTextField ? meme.topText : meme.bottomText
+        } else {
+            textField.text = textField == topTextField ? "TOP" : "BOTTOM"
+        }
     }
     
     
@@ -72,7 +77,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         imagePickerView.backgroundColor = .black
         imagePickerView.contentMode = .scaleAspectFit
         imagePickerView.clipsToBounds = true
-        shareButton.isEnabled = false
+        if meme != nil {
+            imagePickerView.image = meme.originalImage
+            shareButton.isEnabled = true
+        } else {
+            shareButton.isEnabled = false
+        }
         textAttribute(textField: topTextField)
         textAttribute(textField: bottomTextField)
         navBar.alpha = 0.6
