@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -32,6 +32,12 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimensionWidth, height: dimensionHeight)
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(MemeCollectionViewController.handleLongPress(_:)))
+        longPress.minimumPressDuration = 0.5
+        longPress.delaysTouchesBegan = true
+        longPress.delegate = self
+        self.collectionView.addGestureRecognizer(longPress)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -159,6 +165,7 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
             self.editButton.title = "Edit"
             self.itemsSelected = []
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+            self.editButton.isEnabled = appDelegate.memes.count == 0 ? false : true
             selectItems()
             
         }, completion: {_ in})
@@ -170,14 +177,22 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func handleLongPress(_ longPress: UILongPressGestureRecognizer) {
+        let point = longPress.location(in: self.collectionView)
+        let indexPath = self.collectionView.indexPathForItem(at: point)
+        
+        if longPress.state == .began {
+            //            return
+            if let indexPath = indexPath {
+                if let _ = self.collectionView.cellForItem(at: indexPath) as? MemeCollectionViewCell {
+                    if self.editButton.title == "Edit" {
+                        editCollection(self)
+                        print(indexPath)
+                        collectionView(_: collectionView, didSelectItemAt: indexPath)
+                    }
+                }
+            }
+        }
     }
-    */
 
 }
