@@ -23,6 +23,12 @@ class MemeTableViewCell: UITableViewCell {
         self.tableImageView.clipsToBounds = true
     }
     
+    func setAlpha(_ alpha: CGFloat) {
+        self.tableImageView.alpha = alpha
+        self.topLabelView.alpha = alpha
+        self.bottomLabelView.alpha = alpha
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

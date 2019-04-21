@@ -27,6 +27,8 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         
@@ -36,29 +38,13 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         } else {
             self.editButton.isEnabled = true
         }
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.editButton.title = "Edit"
         self.rowsSelected = []
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMeme))
-        selectRows()
-    }
-    
-    func deselectRows() {
-        for i in 0..<self.tableView!.numberOfRows(inSection: 0) {
-            let cell = self.tableView.cellForRow(at: IndexPath(item: i, section: 0)) as! MemeTableViewCell
-            cell.alpha = 0.4
-            
-        }
-    }
-    
-    func selectRows() {
-        for i in 0..<self.tableView!.numberOfRows(inSection: 0) {
-            let cell = self.tableView.cellForRow(at: IndexPath(item: i, section: 0)) as! MemeTableViewCell
-            cell.alpha = 1
-        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,9 +58,11 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let appDelegate = object as! AppDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: "rowReuseIdentifier") as! MemeTableViewCell
         let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
+        let alpha: CGFloat = self.editButton.title == "Edit" ? 1 : 0.4
         
         // Set the texts and image
         cell.setCell(meme: meme)
+        cell.setAlpha(alpha)
         
         return cell
     }
@@ -91,18 +79,16 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.navigationController!.pushViewController(detailController, animated: true)
                 
             } else {
-                if currentCell.alpha != 1 {
-                    print("alpha == 0.4")
+                if currentCell.tableImageView.alpha != 1 {
                     if !(rowsSelected.contains(indexPath)) {
                         rowsSelected.append(indexPath)
-                        currentCell.alpha = 1
+                        currentCell.setAlpha(1)
                     }
                 } else {
-                    print("alpha == 1")
                     if (rowsSelected.contains(indexPath)) {
                         let foundIndex = rowsSelected.firstIndex(of: indexPath)
                         rowsSelected.remove(at: foundIndex!)
-                        currentCell.alpha = 0.4
+                        currentCell.setAlpha(0.4)
                     }
                 }
             }
@@ -150,13 +136,12 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if self.editButton.title == "Edit" {
             self.editButton.title = "Done"
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteRows))
-            deselectRows()
         } else {
             self.editButton.title = "Edit"
             self.rowsSelected = []
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMeme))
-            selectRows()
         }
+        self.tableView.reloadData()
     }
         
     @objc func deleteRows() {
@@ -172,9 +157,9 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.deleteRows(at: self.rowsSelected, with: UITableView.RowAnimation.left)
         self.editButton.title = "Edit"
         self.rowsSelected = []
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMeme))
         self.editButton.isEnabled = appDelegate.memes.count == 0 ? false : true
-        selectRows()
+        self.tableView.reloadData()
     }
     
     @objc func addNewMeme() {
