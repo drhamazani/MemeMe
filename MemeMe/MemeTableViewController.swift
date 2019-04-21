@@ -123,6 +123,28 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
             self.editButton.isEnabled = appDelegate.memes.count == 0 ? false : true
         }
     }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.5) {
+            if let cell = tableView.cellForRow(at: indexPath) as? MemeTableViewCell {
+                cell.contentView.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
+                cell.tableImageView.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
+                cell.topLabelView.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
+                cell.bottomLabelView.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.5) {
+            if let cell = tableView.cellForRow(at: indexPath) as? MemeTableViewCell {
+                cell.contentView.backgroundColor = .clear
+                cell.tableImageView.backgroundColor = .clear
+                cell.topLabelView.backgroundColor = .clear
+                cell.bottomLabelView.backgroundColor = .clear
+            }
+        }
+    }
 
     @IBAction func editTable(_ sender: Any) {
         if self.editButton.title == "Edit" {
