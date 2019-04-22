@@ -102,8 +102,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: Declaring viewWillDisappear Function
     override func viewWillDisappear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.navigationBar.isHidden = false
+//        self.tabBarController?.tabBar.isHidden = false
+//        self.navigationController?.navigationBar.isHidden = false
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
@@ -193,6 +193,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             
             if success {
                 self.save()
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController?.navigationBar.isHidden = false
                 self.navigationController?.popToRootViewController(animated: true)
             }
             
@@ -207,6 +209,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         bottomTextFieldEdited = false
         imagePickerView.image = nil
         shareButton.isEnabled = false
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.popToRootViewController(animated: true)
     }
     

@@ -10,9 +10,9 @@ import UIKit
 
 class MemeCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var collectionImage: UIImageView!
-    @IBOutlet weak var topLabel: UILabel!
-    @IBOutlet weak var bottomLabel: UILabel!
+    @IBOutlet weak var collectionImageView: UIImageView!
+    @IBOutlet weak var topLabelView: UILabel!
+    @IBOutlet weak var bottomLabelView: UILabel!
     
     func attributeString(label: UILabel, memeText: String) -> NSAttributedString {
         let attrString = NSAttributedString(string: memeText, attributes: [NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.strokeWidth: -2, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 11)!])
@@ -20,16 +20,18 @@ class MemeCollectionViewCell: UICollectionViewCell {
     }
     
     func setCell(meme: Meme) {
-        self.topLabel.attributedText = self.attributeString(label: topLabel, memeText: meme.topText)
-        self.bottomLabel.attributedText = self.attributeString(label: bottomLabel, memeText: meme.bottomText)
-        self.collectionImage.image = meme.originalImage
-        self.collectionImage.contentMode = .scaleAspectFill
-        self.collectionImage.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
-        self.collectionImage.clipsToBounds = true
+        self.topLabelView.attributedText = self.attributeString(label: topLabelView, memeText: meme.topText)
+        self.bottomLabelView.attributedText = self.attributeString(label: bottomLabelView, memeText: meme.bottomText)
+        self.collectionImageView.image = meme.originalImage
+        self.collectionImageView.contentMode = .scaleAspectFill
+        self.collectionImageView.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
+        self.collectionImageView.clipsToBounds = true
     }
     
-    func setAlpha(alpha: CGFloat) {
-        self.collectionImage.alpha = alpha
+    func setAlpha(_ alpha: CGFloat) {
+        self.collectionImageView.alpha = alpha
+        self.topLabelView.alpha = alpha
+        self.bottomLabelView.alpha = alpha
     }
     
 }

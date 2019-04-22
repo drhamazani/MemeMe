@@ -41,6 +41,8 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         
@@ -59,29 +61,10 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         self.editButton.title = "Edit"
         self.itemsSelected = []
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMeme))
-        selectItems()
+//        selectItems()
+        self.collectionView.reloadData()
     }
     
-    func reloadSection() {
-        var indexPaths: [NSIndexPath] = []
-        for i in 0..<self.collectionView!.numberOfItems(inSection: 0) {
-            indexPaths.append(NSIndexPath(item: i, section: 0))
-        }
-    }
-    
-    func deselectItems() {
-        for i in 0..<self.collectionView!.numberOfItems(inSection: 0) {
-            let cell = self.collectionView.cellForItem(at: IndexPath(item: i, section: 0)) as! MemeCollectionViewCell
-            cell.collectionImage.alpha = 0.4
-        }
-    }
-    
-    func selectItems() {
-        for i in 0..<self.collectionView!.numberOfItems(inSection: 0) {
-            let cell = self.collectionView.cellForItem(at: IndexPath(item: i, section: 0)) as! MemeCollectionViewCell
-            cell.collectionImage.alpha = 1
-        }
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let object = UIApplication.shared.delegate
@@ -94,14 +77,20 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         let appDelegate = object as! AppDelegate
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemReuseIdentifier", for: indexPath) as! MemeCollectionViewCell
         let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
+//        let alpha: CGFloat = self.editButton.title == "Edit" ? 1 : 0.4
         
         // Set the image
         cell.setCell(meme: meme)
-        
+//        cell.setAlpha(alpha)
         if self.editButton.title == "Edit" {
-            cell.setAlpha(alpha: 1)
-        } else {
-            cell.setAlpha(alpha: 0.4)
+            print("1111111")
+            cell.setAlpha(1)
+        } else if (self.editButton.title == "Done") && (self.itemsSelected.contains(indexPath)) {
+            print("222222")
+            cell.setAlpha(1)
+        } else if (self.editButton.title == "Done") && !(self.itemsSelected.contains(indexPath)) {
+            print("3333333")
+            cell.setAlpha(0.4)
         }
         
         
@@ -120,17 +109,19 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
                 self.navigationController!.pushViewController(detailController, animated: true)
                 
             } else {
-                if currentCell.collectionImage.alpha != 1 {
+                if currentCell.collectionImageView.alpha != 1 {
                     print(indexPath.row)
-                    if !(itemsSelected.contains(indexPath)) {
-                        itemsSelected.append(indexPath)
-                        currentCell.collectionImage.alpha = 1
+                    if !(self.itemsSelected.contains(indexPath)) {
+                        self.itemsSelected.append(indexPath)
+                        currentCell.setAlpha(1)
+                        print(currentCell.topLabelView.text!)
                     }
                 } else {
-                    if (itemsSelected.contains(indexPath)) {
-                        let foundIndex = itemsSelected.firstIndex(of: indexPath)
-                        itemsSelected.remove(at: foundIndex!)
-                        currentCell.collectionImage.alpha = 0.4
+                    if (self.itemsSelected.contains(indexPath)) {
+                        let foundIndex = self.itemsSelected.firstIndex(of: indexPath)
+                        self.itemsSelected.remove(at: foundIndex!)
+                        currentCell.setAlpha(0.4)
+                        print(currentCell.bottomLabelView.text!)
                     }
                 }
             }
@@ -141,34 +132,30 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         if self.editButton.title == "Edit" {
             self.editButton.title = "Done"
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteItems))
-            deselectItems()
+//            deselectItems()
         } else if self.editButton.title == "Done" {
             self.editButton.title = "Edit"
             self.itemsSelected = []
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMeme))
-            selectItems()
+//            selectItems()
         }
-        self.reloadSection()
+//        self.reloadSection()
+        self.collectionView.reloadData()
     }
     
     @objc func deleteItems() {
-        self.collectionView.performBatchUpdates({
-            let object = UIApplication.shared.delegate
-            let appDelegate = object as! AppDelegate
-            self.itemsSelected = self.itemsSelected.sorted() {
-                $0.row > $1.row
-            }
-            for indexPath in self.itemsSelected {
-                appDelegate.memes.remove(at: indexPath.row)
-            }
-            self.collectionView.deleteItems(at: self.itemsSelected)
-            self.editButton.title = "Edit"
-            self.itemsSelected = []
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
-            self.editButton.isEnabled = appDelegate.memes.count == 0 ? false : true
-            selectItems()
-            
-        }, completion: {_ in})
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        self.itemsSelected = self.itemsSelected.sorted() {
+            $0.row > $1.row
+        }
+        for indexPath in self.itemsSelected {
+            appDelegate.memes.remove(at: indexPath.row)
+        }
+        self.editCollection(self)
+        self.collectionView.deleteItems(at: self.itemsSelected)
+        self.editButton.isEnabled = appDelegate.memes.count == 0 ? false : true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMeme))
     }
     
     @objc func addNewMeme() {
@@ -188,7 +175,9 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
                     if self.editButton.title == "Edit" {
                         editCollection(self)
                         print(indexPath)
-                        collectionView(_: collectionView, didSelectItemAt: indexPath)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                            self.collectionView(_: self.collectionView, didSelectItemAt: indexPath)
+                        })
                     }
                 }
             }

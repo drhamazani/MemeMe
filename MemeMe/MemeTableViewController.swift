@@ -22,13 +22,9 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.navigationBar.isHidden = false
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         
@@ -58,11 +54,22 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let appDelegate = object as! AppDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: "rowReuseIdentifier") as! MemeTableViewCell
         let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
-        let alpha: CGFloat = self.editButton.title == "Edit" ? 1 : 0.4
+//        let alpha: CGFloat = self.editButton.title == "Edit" ? 1 : 0.4
         
         // Set the texts and image
         cell.setCell(meme: meme)
-        cell.setAlpha(alpha)
+//        cell.setAlpha(alpha)
+        
+        if self.editButton.title == "Edit" {
+            print("1111111")
+            cell.setAlpha(1)
+        } else if (self.editButton.title == "Done") && (self.rowsSelected.contains(indexPath)) {
+            print("222222")
+            cell.setAlpha(1)
+        } else if (self.editButton.title == "Done") && !(self.rowsSelected.contains(indexPath)) {
+            print("3333333")
+            cell.setAlpha(0.4)
+        }
         
         return cell
     }
@@ -154,12 +161,9 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         for indexPath in self.rowsSelected {
             appDelegate.memes.remove(at: indexPath.row)
         }
+        editTable(self)
         self.tableView.deleteRows(at: self.rowsSelected, with: UITableView.RowAnimation.left)
-        self.editButton.title = "Edit"
-        self.rowsSelected = []
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMeme))
         self.editButton.isEnabled = appDelegate.memes.count == 0 ? false : true
-        self.tableView.reloadData()
     }
     
     @objc func addNewMeme() {
@@ -167,15 +171,4 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let controller = storyboard.instantiateViewController(withIdentifier: "MemeEditorViewController")as! MemeEditorViewController
         self.navigationController?.pushViewController(controller, animated: true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

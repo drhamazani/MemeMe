@@ -187,9 +187,9 @@
                                             <constraint firstItem="Pvt-w9-rVb" firstAttribute="centerY" secondItem="Pnd-vj-xZa" secondAttribute="centerY" id="W9e-gd-8LM"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="bottomLabel" destination="K8D-QV-RHI" id="PJ7-9x-qFW"/>
-                                            <outlet property="collectionImage" destination="Pvt-w9-rVb" id="dfJ-fL-Ri6"/>
-                                            <outlet property="topLabel" destination="4BG-pu-Oo0" id="1io-UE-vqU"/>
+                                            <outlet property="bottomLabelView" destination="K8D-QV-RHI" id="PJ7-9x-qFW"/>
+                                            <outlet property="collectionImageView" destination="Pvt-w9-rVb" id="dfJ-fL-Ri6"/>
+                                            <outlet property="topLabelView" destination="4BG-pu-Oo0" id="1io-UE-vqU"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
