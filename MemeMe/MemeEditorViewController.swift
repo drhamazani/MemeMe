@@ -8,19 +8,30 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-    
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+
     // MARK: Declaring IBOutlets
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var textEditButton: UIBarButtonItem!
+    @IBOutlet weak var backgoundColorButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var textEditPickerView: UIPickerView!
+    @IBOutlet weak var backgroundColorPickerView: UIPickerView!
+    @IBOutlet weak var pickerViewToolBar: UIToolbar!
+    @IBOutlet weak var textSizeSlider: UISlider!
+    @IBOutlet weak var textSizeLabelButton: UIBarButtonItem!
     var topTextFieldEdited = false
     var bottomTextFieldEdited = false
     var meme: Meme!
+    var pickerViewContent = ""
+    var textEditRows = ["font1", "font2"]
+    var backgroundColorRows = ["black", "white", "red", "blue", "green", "gray"]
+    var backgroundColorPickerViewTapped: [UIColor] = [.black, .white, .red, .blue, .green, .gray]
     
     // MARK: Text Attributes
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
@@ -74,6 +85,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Do any additional setup after loading the view, typically from a nib.
         topTextField.delegate = self
         bottomTextField.delegate = self
+        textEditPickerView.delegate = self
+        textEditPickerView.dataSource = self
+        backgroundColorPickerView.delegate = self
+        backgroundColorPickerView.dataSource = self
         imagePickerView.backgroundColor = .black
         imagePickerView.contentMode = .scaleAspectFit
         imagePickerView.clipsToBounds = true
@@ -85,8 +100,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
         textAttribute(textField: topTextField)
         textAttribute(textField: bottomTextField)
-        navBar.alpha = 0.6
-        toolBar.alpha = 0.6
+        navBar.alpha = 0.8
+        toolBar.alpha = 0.8
+        textEditPickerView.alpha = 0.8
+        backgroundColorPickerView.alpha = 0.8
     }
     
     // MARK: Declaring viewWillAppear Function
@@ -98,6 +115,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.navigationController?.navigationBar.isHidden = true
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
+        textEditPickerView.isHidden = true
+        backgroundColorPickerView.isHidden = true
+        pickerViewToolBar.isHidden = true
     }
     
     // MARK: Declaring viewWillDisappear Function
@@ -166,6 +186,62 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == textEditPickerView {
+            return textEditRows.count
+        } else if pickerView == backgroundColorPickerView {
+            return backgroundColorRows.count
+        } else {
+            return 1
+        }
+//        if self.pickerViewContent == "textEdit" {
+//            return textEditRows.count
+//        } else if self.pickerViewContent == "backgroundColor" {
+//            return backgroundColorRows.count
+//        } else {
+//            return 1
+//        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == textEditPickerView {
+            return textEditRows[row]
+        } else if pickerView == backgroundColorPickerView {
+            return backgroundColorRows[row]
+        } else {
+            return "Empty"
+        }
+//        if self.pickerViewContent == "textEdit" {
+//            return textEditRows[row]
+//        } else if self.pickerViewContent == "backgroundColor" {
+//            return backgroundColorRows[row]
+//        } else {
+//            return "Empty"
+//        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == textEditPickerView {
+            print(textEditRows[row])
+        } else if pickerView == backgroundColorPickerView {
+            imagePickerView.backgroundColor = backgroundColorPickerViewTapped[row]
+        } else {
+            print("Empty")
+        }
+//        if self.pickerViewContent == "textEdit" {
+//            print(textEditRows[row])
+//        } else if self.pickerViewContent == "backgroundColor" {
+//            imagePickerView.backgroundColor = backgroundColorPickerViewTapped[row]
+//            print(backgroundColorRows[row])
+//        } else {
+//            print("Empty")
+//        }
+    }
+    
     // MARK: Declaring imagePickerControllerDidCancel Function
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
@@ -182,6 +258,53 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         chooseImageFrom(source: .camera)
     }
+    
+    
+    @IBAction func textEditTapped(_ sender: Any) {
+//        self.pickerViewContent = "textEdit"
+        if textEditPickerView.isHidden {
+//            textEditPickerView.reloadAllComponents()
+            textEditPickerView.isHidden = false
+            backgroundColorPickerView.isHidden = true
+            pickerViewToolBar.isHidden = false
+        } else if !(textEditPickerView.isHidden) {
+            textEditPickerView.isHidden = true
+            pickerViewToolBar.isHidden = true
+        }
+//            pickerView.reloadAllComponents()
+//            pickerViewToolBar.isHidden = false
+//        pickerView.reloadAllComponents()
+//        pickerView.isHidden = pickerView.isHidden ? false : true
+    }
+    
+    @IBAction func backgroundColorTapped(_ sender: Any) {
+        
+        if backgroundColorPickerView.isHidden {
+            //            textEditPickerView.reloadAllComponents()
+            textEditPickerView.isHidden = true
+            backgroundColorPickerView.isHidden = false
+            pickerViewToolBar.isHidden = true
+        } else if !(backgroundColorPickerView.isHidden) {
+            backgroundColorPickerView.isHidden = true
+        }
+        
+//        self.pickerViewContent = "backgroundColor"
+//        pickerView.reloadAllComponents()
+//        if pickerView.isHidden {
+//            self.pickerViewContent = "backgroundColor"
+//            pickerView.reloadAllComponents()
+//            pickerView.isHidden = false
+//        } else if !(pickerView.isHidden) && (pickerViewContent == "backgroundColor") {
+//            pickerView.isHidden = true
+//        } else if !(pickerView.isHidden) && (pickerViewContent == "textEdit") {
+//            pickerViewContent = "backgroundColor"
+//            pickerView.reloadAllComponents()
+//            pickerViewToolBar.isHidden = true
+//        }
+//        pickerView.isHidden = pickerView.isHidden ? false : true
+//        pickerViewToolBar.isHidden = pickerViewToolBar.isHidden ? false : true
+    }
+    
     
     // MARK: The IBAction for opening the activity view
     @IBAction func shareButtonTapped(_ sender: Any) {
@@ -257,8 +380,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @objc func tapDetected() {
-        navBar.isHidden = navBar.isHidden ? false : true
-        toolBar.isHidden = navBar.isHidden
+        if (textEditPickerView.isHidden) && (backgroundColorPickerView.isHidden) {
+            navBar.isHidden = navBar.isHidden ? false : true
+            toolBar.isHidden = navBar.isHidden
+        }
     }
 
 }

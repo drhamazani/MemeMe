@@ -266,9 +266,17 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Rwp-Hu-Z3j"/>
-                                    <barButtonItem title="Item" image="fill" id="ob7-vf-k3g"/>
+                                    <barButtonItem title="Item" image="fill" id="ob7-vf-k3g">
+                                        <connections>
+                                            <action selector="backgroundColorTapped:" destination="BYZ-38-t0r" id="EKh-5g-MJU"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="E7T-nS-hgL"/>
-                                    <barButtonItem image="textIcon" id="bSu-gd-DuS"/>
+                                    <barButtonItem image="textIcon" id="bSu-gd-DuS">
+                                        <connections>
+                                            <action selector="textEditTapped:" destination="BYZ-38-t0r" id="Z6R-wm-Y2N"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Oa5-MX-gLY"/>
                                     <barButtonItem style="plain" systemItem="camera" id="tRp-kB-atD">
                                         <connections>
@@ -303,6 +311,7 @@
                             </navigationBar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdF-aV-94A">
                                 <rect key="frame" x="0.0" y="639" width="414" height="179"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLc-Ou-WPP">
                                 <rect key="frame" x="0.0" y="595" width="414" height="44"/>
@@ -320,6 +329,10 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMa-QW-d99" userLabel="Background Color Picker View">
+                                <rect key="frame" x="0.0" y="639" width="414" height="179"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -330,6 +343,7 @@
                             <constraint firstItem="eLy-vm-Y3S" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Dey-ok-34p"/>
                             <constraint firstItem="HPn-z4-tzS" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="G1r-6g-GFN"/>
                             <constraint firstItem="vdF-aV-94A" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="Hxb-Ad-Vqf"/>
+                            <constraint firstItem="HPn-z4-tzS" firstAttribute="top" secondItem="OMa-QW-d99" secondAttribute="bottom" id="IVZ-lN-wcc"/>
                             <constraint firstItem="4wG-go-rtE" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="M12-GH-Bzt"/>
                             <constraint firstItem="qLc-Ou-WPP" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="M6D-4c-xfb"/>
                             <constraint firstItem="eLy-vm-Y3S" firstAttribute="top" secondItem="tYW-yJ-WLo" secondAttribute="bottom" id="MCB-tL-6OC"/>
@@ -337,6 +351,9 @@
                             <constraint firstItem="O7t-p3-JfQ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ncu-UG-sj6"/>
                             <constraint firstItem="4wG-go-rtE" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="PM2-7a-CUc"/>
                             <constraint firstItem="HPn-z4-tzS" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Rvb-gQ-7GZ"/>
+                            <constraint firstItem="OMa-QW-d99" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="acA-bU-flD"/>
+                            <constraint firstItem="OMa-QW-d99" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="d3b-Q6-6c2"/>
+                            <constraint firstItem="OMa-QW-d99" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="gDX-Gr-lrE"/>
                             <constraint firstItem="HPn-z4-tzS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="h3z-hQ-rPr"/>
                             <constraint firstItem="4wG-go-rtE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h5F-Mv-4PK"/>
                             <constraint firstItem="O7t-p3-JfQ" firstAttribute="bottom" secondItem="HPn-z4-tzS" secondAttribute="top" id="iGX-h4-gLp"/>
@@ -350,11 +367,18 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="backgoundColorButton" destination="ob7-vf-k3g" id="5NW-9I-Z2e"/>
+                        <outlet property="backgroundColorPickerView" destination="OMa-QW-d99" id="WhO-sT-Ec4"/>
                         <outlet property="bottomTextField" destination="O7t-p3-JfQ" id="Zm9-WA-gLP"/>
                         <outlet property="cameraButton" destination="tRp-kB-atD" id="Po0-al-lPd"/>
                         <outlet property="imagePickerView" destination="4wG-go-rtE" id="1xB-fz-G9t"/>
                         <outlet property="navBar" destination="tYW-yJ-WLo" id="IZG-Rw-Wsg"/>
+                        <outlet property="pickerViewToolBar" destination="qLc-Ou-WPP" id="0Gr-ah-4cG"/>
                         <outlet property="shareButton" destination="h5p-Dd-bV5" id="Emb-lH-RHC"/>
+                        <outlet property="textEditButton" destination="bSu-gd-DuS" id="Fh1-Qv-tnP"/>
+                        <outlet property="textEditPickerView" destination="vdF-aV-94A" id="bz7-hl-pap"/>
+                        <outlet property="textSizeLabelButton" destination="coO-p8-EjG" id="751-On-cfm"/>
+                        <outlet property="textSizeSlider" destination="7Bd-5Y-OtE" id="o4t-hr-CXG"/>
                         <outlet property="toolBar" destination="HPn-z4-tzS" id="RIz-fF-92n"/>
                         <outlet property="topTextField" destination="eLy-vm-Y3S" id="bwS-yQ-a02"/>
                     </connections>
