@@ -32,7 +32,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var textEditRows = ["HelveticaNeue-CondensedBlack", "HoeflerText-Black", "MalayalamSangamMN-Bold", "Menlo-Bold", "MarkerFelt-Wide", "Optima-ExtraBlack"]
     var backgroundColorRows = ["black", "white", "red", "blue", "green", "gray"]
     var backgroundColorPickerViewTapped: [UIColor] = [.black, .white, .red, .blue, .green, .gray]
-    var textSize: CGFloat = 40
+    var textSize: CGFloat!
     
     // MARK: Text Attributes
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
@@ -119,6 +119,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         textEditPickerView.isHidden = true
         backgroundColorPickerView.isHidden = true
         pickerViewToolBar.isHidden = true
+        textSize = bottomTextField.font?.pointSize
+        print(textSize)
+        textSizeSlider.value = Float(textSize)
     }
     
     // MARK: Declaring viewWillDisappear Function
@@ -235,8 +238,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == textEditPickerView {
-            topTextField.font = UIFont(name: textEditRows[row], size: textSize)
-            bottomTextField.font = UIFont(name: textEditRows[row], size: textSize)
+            topTextField.font = UIFont(name: textEditRows[row], size: CGFloat(Int(textSizeSlider.value)))
+            bottomTextField.font = UIFont(name: textEditRows[row], size: CGFloat(Int(textSizeSlider.value)))
         } else if pickerView == backgroundColorPickerView {
             imagePickerView.backgroundColor = backgroundColorPickerViewTapped[row]
         } else {
@@ -285,6 +288,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 //            pickerViewToolBar.isHidden = false
 //        pickerView.reloadAllComponents()
 //        pickerView.isHidden = pickerView.isHidden ? false : true
+    }
+    
+    
+    @IBAction func sliderAction(_ sender: Any) {
+        topTextField.font = topTextField.font?.withSize(CGFloat(Int(textSizeSlider.value)))
+        bottomTextField.font = bottomTextField.font?.withSize(CGFloat(Int(textSizeSlider.value)))
     }
     
     @IBAction func backgroundColorTapped(_ sender: Any) {

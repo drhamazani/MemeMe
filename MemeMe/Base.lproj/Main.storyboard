@@ -319,12 +319,17 @@
                                     <constraint firstAttribute="height" constant="44" id="TRh-pz-AQr"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Text Size" style="plain" id="coO-p8-EjG"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="UEw-pu-Zby"/>
+                                    <barButtonItem title="Text Size" style="plain" id="coO-p8-EjG">
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </barButtonItem>
+                                    <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="UEw-pu-Zby"/>
                                     <barButtonItem style="plain" id="7vu-CW-8mq">
-                                        <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="7Bd-5Y-OtE">
-                                            <rect key="frame" x="142" y="5" width="204" height="34"/>
+                                        <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="40" minValue="20" maxValue="60" id="7Bd-5Y-OtE">
+                                            <rect key="frame" x="120" y="5" width="204" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="sliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="Chc-lR-rTJ"/>
+                                            </connections>
                                         </slider>
                                     </barButtonItem>
                                 </items>
