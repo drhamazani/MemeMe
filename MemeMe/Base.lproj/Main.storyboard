@@ -54,7 +54,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzO-cC-S51">
-                                                    <rect key="frame" x="124" y="16" width="258" height="30"/>
+                                                    <rect key="frame" x="124" y="16" width="652" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="ybD-SH-0tw"/>
                                                     </constraints>
@@ -63,7 +63,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpt-n5-m2u">
-                                                    <rect key="frame" x="124" y="46" width="258" height="30"/>
+                                                    <rect key="frame" x="124" y="46" width="652" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="IoL-8x-cux"/>
                                                     </constraints>
@@ -266,13 +266,17 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Rwp-Hu-Z3j"/>
+                                    <barButtonItem title="Item" image="fill" id="ob7-vf-k3g"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="E7T-nS-hgL"/>
+                                    <barButtonItem image="textIcon" id="bSu-gd-DuS"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Oa5-MX-gLY"/>
                                     <barButtonItem style="plain" systemItem="camera" id="tRp-kB-atD">
                                         <connections>
                                             <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="tVi-2o-83q"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="3L4-NL-ezh"/>
-                                    <barButtonItem title="Album" id="mh0-BM-pYS">
+                                    <barButtonItem image="toolBarAlbum" id="mh0-BM-pYS">
                                         <connections>
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="QCV-DV-o9t"/>
                                         </connections>
@@ -297,6 +301,25 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdF-aV-94A">
+                                <rect key="frame" x="0.0" y="639" width="414" height="179"/>
+                            </pickerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLc-Ou-WPP">
+                                <rect key="frame" x="0.0" y="595" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="TRh-pz-AQr"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Text Size" style="plain" id="coO-p8-EjG"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="UEw-pu-Zby"/>
+                                    <barButtonItem style="plain" id="7vu-CW-8mq">
+                                        <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="7Bd-5Y-OtE">
+                                            <rect key="frame" x="142" y="5" width="204" height="34"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </slider>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -305,16 +328,23 @@
                             <constraint firstItem="eLy-vm-Y3S" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="3iA-xy-oUx"/>
                             <constraint firstItem="tYW-yJ-WLo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="949-uv-czP"/>
                             <constraint firstItem="eLy-vm-Y3S" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Dey-ok-34p"/>
-                            <constraint firstItem="HPn-z4-tzS" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="G1r-6g-GFN"/>
+                            <constraint firstItem="HPn-z4-tzS" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="G1r-6g-GFN"/>
+                            <constraint firstItem="vdF-aV-94A" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="Hxb-Ad-Vqf"/>
                             <constraint firstItem="4wG-go-rtE" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="M12-GH-Bzt"/>
+                            <constraint firstItem="qLc-Ou-WPP" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="M6D-4c-xfb"/>
                             <constraint firstItem="eLy-vm-Y3S" firstAttribute="top" secondItem="tYW-yJ-WLo" secondAttribute="bottom" id="MCB-tL-6OC"/>
+                            <constraint firstItem="vdF-aV-94A" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MF1-YO-Hu5"/>
                             <constraint firstItem="O7t-p3-JfQ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ncu-UG-sj6"/>
                             <constraint firstItem="4wG-go-rtE" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="PM2-7a-CUc"/>
                             <constraint firstItem="HPn-z4-tzS" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Rvb-gQ-7GZ"/>
-                            <constraint firstItem="HPn-z4-tzS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="h3z-hQ-rPr"/>
+                            <constraint firstItem="HPn-z4-tzS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="h3z-hQ-rPr"/>
                             <constraint firstItem="4wG-go-rtE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h5F-Mv-4PK"/>
                             <constraint firstItem="O7t-p3-JfQ" firstAttribute="bottom" secondItem="HPn-z4-tzS" secondAttribute="top" id="iGX-h4-gLp"/>
-                            <constraint firstItem="tYW-yJ-WLo" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="txN-Il-uPJ"/>
+                            <constraint firstItem="qLc-Ou-WPP" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="m71-6R-ATX"/>
+                            <constraint firstItem="vdF-aV-94A" firstAttribute="top" secondItem="qLc-Ou-WPP" secondAttribute="bottom" id="nHs-Um-4U4"/>
+                            <constraint firstItem="vdF-aV-94A" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="pES-NI-7pl"/>
+                            <constraint firstItem="vdF-aV-94A" firstAttribute="bottom" secondItem="HPn-z4-tzS" secondAttribute="top" id="qen-eg-1bm"/>
+                            <constraint firstItem="tYW-yJ-WLo" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="txN-Il-uPJ"/>
                             <constraint firstItem="4wG-go-rtE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="za4-xP-Vjc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -440,6 +470,9 @@
     </scenes>
     <resources>
         <image name="collection" width="30" height="30.5"/>
+        <image name="fill" width="24" height="24"/>
         <image name="table" width="30" height="30"/>
+        <image name="textIcon" width="24" height="24"/>
+        <image name="toolBarAlbum" width="24" height="24"/>
     </resources>
 </document>
