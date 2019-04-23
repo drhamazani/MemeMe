@@ -29,9 +29,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var bottomTextFieldEdited = false
     var meme: Meme!
     var pickerViewContent = ""
-    var textEditRows = ["font1", "font2"]
+    var textEditRows = ["HelveticaNeue-CondensedBlack", "HoeflerText-Black", "MalayalamSangamMN-Bold", "Menlo-Bold", "MarkerFelt-Wide", "Optima-ExtraBlack"]
     var backgroundColorRows = ["black", "white", "red", "blue", "green", "gray"]
     var backgroundColorPickerViewTapped: [UIColor] = [.black, .white, .red, .blue, .green, .gray]
+    var textSize: CGFloat = 40
     
     // MARK: Text Attributes
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
@@ -207,6 +208,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 //        }
     }
     
+//    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+//        if pickerView == textEditPickerView {
+//            return attributeTextEdit(textEditRows[row])
+//        } else {
+//            return NSAttributedString(string: "Empty", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 15)!])
+//        }
+//    }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == textEditPickerView {
             return textEditRows[row]
@@ -226,7 +235,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == textEditPickerView {
-            print(textEditRows[row])
+            topTextField.font = UIFont(name: textEditRows[row], size: textSize)
+            bottomTextField.font = UIFont(name: textEditRows[row], size: textSize)
         } else if pickerView == backgroundColorPickerView {
             imagePickerView.backgroundColor = backgroundColorPickerViewTapped[row]
         } else {
@@ -385,5 +395,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             toolBar.isHidden = navBar.isHidden
         }
     }
-
+    
+    func attributeTextEdit(_ font: String) -> NSAttributedString {
+        let text = NSAttributedString(string: font, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: font, size: 15)!])
+//        let text = NSAttributedString(string: font, attributes: [NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.strokeWidth: -2, NSAttributedString.Key.font: UIFont(name: font, size: 15)!])
+        
+        return text
+    }
 }
