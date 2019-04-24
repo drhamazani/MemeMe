@@ -54,6 +54,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: Declaring textFieldDidBeginEditing Function
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textEditPickerView.isHidden = true
+        backgroundColorPickerView.isHidden = true
+        pickerViewToolBar.isHidden = true
         if textField == topTextField && topTextFieldEdited == false  {
             textField.text = ""
         } else if textField == bottomTextField && bottomTextFieldEdited == false {
@@ -93,14 +96,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         imagePickerView.backgroundColor = .black
         imagePickerView.contentMode = .scaleAspectFit
         imagePickerView.clipsToBounds = true
+        textAttribute(textField: topTextField)
+        textAttribute(textField: bottomTextField)
         if meme != nil {
+            let textEditIndex = self.textEditRows.firstIndex(of: (meme.textFont?.fontName)!)
+            let backgroundColorIndex = self.backgroundColorPickerViewTapped.firstIndex(of: (meme.backGroundColor!))
             imagePickerView.image = meme.originalImage
+            imagePickerView.backgroundColor = meme.backGroundColor
+            topTextField.font = meme.textFont
+            bottomTextField.font = meme.textFont
             shareButton.isEnabled = true
+            textSizeSlider.value = Float(meme.textFont.pointSize)
+            backgroundColorPickerView.selectRow(backgroundColorIndex!, inComponent: 0, animated: false)
+            textEditPickerView.selectRow(textEditIndex!, inComponent: 0, animated: false)
         } else {
             shareButton.isEnabled = false
         }
-        textAttribute(textField: topTextField)
-        textAttribute(textField: bottomTextField)
         navBar.alpha = 0.8
         toolBar.alpha = 0.8
         textEditPickerView.alpha = 0.8
@@ -119,9 +130,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         textEditPickerView.isHidden = true
         backgroundColorPickerView.isHidden = true
         pickerViewToolBar.isHidden = true
-        textSize = bottomTextField.font?.pointSize
-        print(textSize)
-        textSizeSlider.value = Float(textSize)
+
     }
     
     // MARK: Declaring viewWillDisappear Function
@@ -390,7 +399,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: Declaring save Function
     func save() {
         // Update the meme
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, textFont: topTextField.font, backGroundColor: imagePickerView.backgroundColor, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
         
         // Add it to the memes array on the Application Delegate
         let object = UIApplication.shared.delegate
@@ -402,6 +411,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if (textEditPickerView.isHidden) && (backgroundColorPickerView.isHidden) {
             navBar.isHidden = navBar.isHidden ? false : true
             toolBar.isHidden = navBar.isHidden
+        } else {
+            textEditPickerView.isHidden = true
+            backgroundColorPickerView.isHidden = true
+            pickerViewToolBar.isHidden = true
         }
     }
     

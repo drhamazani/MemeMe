@@ -13,6 +13,8 @@ import UIKit
 struct Meme {
     let topText: String!
     let bottomText: String!
+    let textFont: UIFont!
+    let backGroundColor: UIColor!
     let originalImage: UIImage!
     let memedImage: UIImage
 }

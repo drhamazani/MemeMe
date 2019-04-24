@@ -266,13 +266,13 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Rwp-Hu-Z3j"/>
-                                    <barButtonItem title="Item" image="fill" id="ob7-vf-k3g">
+                                    <barButtonItem title="Item" image="backgroundColor2" id="ob7-vf-k3g">
                                         <connections>
                                             <action selector="backgroundColorTapped:" destination="BYZ-38-t0r" id="EKh-5g-MJU"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="E7T-nS-hgL"/>
-                                    <barButtonItem image="textIcon" id="bSu-gd-DuS">
+                                    <barButtonItem image="textIcon2" id="bSu-gd-DuS">
                                         <connections>
                                             <action selector="textEditTapped:" destination="BYZ-38-t0r" id="Z6R-wm-Y2N"/>
                                         </connections>
@@ -498,10 +498,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="backgroundColor2" width="24" height="24"/>
         <image name="collection" width="30" height="30.5"/>
-        <image name="fill" width="24" height="24"/>
         <image name="table" width="30" height="30"/>
-        <image name="textIcon" width="24" height="24"/>
+        <image name="textIcon2" width="24" height="24"/>
         <image name="toolBarAlbum" width="24" height="24"/>
     </resources>
 </document>
