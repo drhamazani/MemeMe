@@ -399,12 +399,34 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: Declaring save Function
     func save() {
         // Update the meme
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, textFont: topTextField.font, backGroundColor: imagePickerView.backgroundColor, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
         
-        // Add it to the memes array on the Application Delegate
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, textFont: topTextField.font, backGroundColor: imagePickerView.backgroundColor, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+        let checkAll: Bool!
+        if self.meme != nil {
+            print("self.meme != nil")
+            let checkTopText = meme.topText == self.meme.topText
+            print("checkTopText \(checkTopText)")
+            let checkBottomText = meme.bottomText == self.meme.bottomText
+            print("checkBottomText \(checkBottomText)")
+            let checkTextFont = meme.textFont == self.meme.textFont
+            print("checkTextFont \(checkTextFont)")
+            let checkBackgroundColor = meme.backGroundColor == self.meme.backGroundColor
+            print("checkBackgroundColor \(checkBackgroundColor)")
+            let checkOriginalImage = meme.originalImage == self.meme.originalImage
+            print("checkOriginalImage \(checkOriginalImage)")
+            checkAll = checkTopText && checkBottomText && checkTextFont && checkBackgroundColor && checkOriginalImage
+            print("checkAll \(checkAll!)")
+        } else {
+            checkAll = false
+            print("self.meme == nil, so checkAll = false")
+        }
+        if (self.meme == nil) || !checkAll {
+            print("(self.meme == nil) || !checkAll")
+            // Add it to the memes array on the Application Delegate
+            let object = UIApplication.shared.delegate
+            let appDelegate = object as! AppDelegate
+            appDelegate.memes.append(meme)
+        }
     }
     
     @objc func tapDetected() {
