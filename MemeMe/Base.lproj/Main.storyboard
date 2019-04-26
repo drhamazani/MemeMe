@@ -54,7 +54,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzO-cC-S51">
-                                                    <rect key="frame" x="124" y="16" width="652" height="30"/>
+                                                    <rect key="frame" x="124" y="16" width="258" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="ybD-SH-0tw"/>
                                                     </constraints>
@@ -63,7 +63,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpt-n5-m2u">
-                                                    <rect key="frame" x="124" y="46" width="652" height="30"/>
+                                                    <rect key="frame" x="124" y="46" width="258" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="IoL-8x-cux"/>
                                                     </constraints>
@@ -156,7 +156,7 @@
                                                         <constraint firstAttribute="height" constant="90" id="dHV-Iw-Q4y"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="4BG-pu-Oo0">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="4BG-pu-Oo0">
                                                     <rect key="frame" x="41" y="22" width="95" height="10"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="95" id="BZR-4E-fRW"/>
@@ -166,7 +166,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="K8D-QV-RHI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="K8D-QV-RHI">
                                                     <rect key="frame" x="41" y="82" width="95" height="10"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="95" id="D55-0f-biT"/>
@@ -268,13 +268,13 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Rwp-Hu-Z3j"/>
                                     <barButtonItem title="Item" image="backgroundColor2" id="ob7-vf-k3g">
                                         <connections>
-                                            <action selector="backgroundColorTapped:" destination="BYZ-38-t0r" id="EKh-5g-MJU"/>
+                                            <action selector="backgroundColorButtonTapped:" destination="BYZ-38-t0r" id="EKh-5g-MJU"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="E7T-nS-hgL"/>
                                     <barButtonItem image="textIcon2" id="bSu-gd-DuS">
                                         <connections>
-                                            <action selector="textEditTapped:" destination="BYZ-38-t0r" id="Z6R-wm-Y2N"/>
+                                            <action selector="textEditButtonTapped:" destination="BYZ-38-t0r" id="Z6R-wm-Y2N"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Oa5-MX-gLY"/>
@@ -376,13 +376,12 @@
                         <outlet property="backgroundColorPickerView" destination="OMa-QW-d99" id="WhO-sT-Ec4"/>
                         <outlet property="bottomTextField" destination="O7t-p3-JfQ" id="Zm9-WA-gLP"/>
                         <outlet property="cameraButton" destination="tRp-kB-atD" id="Po0-al-lPd"/>
-                        <outlet property="imagePickerView" destination="4wG-go-rtE" id="1xB-fz-G9t"/>
                         <outlet property="navBar" destination="tYW-yJ-WLo" id="IZG-Rw-Wsg"/>
-                        <outlet property="pickerViewToolBar" destination="qLc-Ou-WPP" id="0Gr-ah-4cG"/>
+                        <outlet property="pickedImageView" destination="4wG-go-rtE" id="1xB-fz-G9t"/>
                         <outlet property="shareButton" destination="h5p-Dd-bV5" id="Emb-lH-RHC"/>
                         <outlet property="textEditButton" destination="bSu-gd-DuS" id="Fh1-Qv-tnP"/>
                         <outlet property="textEditPickerView" destination="vdF-aV-94A" id="bz7-hl-pap"/>
-                        <outlet property="textSizeLabelButton" destination="coO-p8-EjG" id="751-On-cfm"/>
+                        <outlet property="textEditPickerViewToolBar" destination="qLc-Ou-WPP" id="0Gr-ah-4cG"/>
                         <outlet property="textSizeSlider" destination="7Bd-5Y-OtE" id="o4t-hr-CXG"/>
                         <outlet property="toolBar" destination="HPn-z4-tzS" id="RIz-fF-92n"/>
                         <outlet property="topTextField" destination="eLy-vm-Y3S" id="bwS-yQ-a02"/>

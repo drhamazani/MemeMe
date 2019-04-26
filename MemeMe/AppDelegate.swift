@@ -11,8 +11,9 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // MARK: Global Variables
     var window: UIWindow?
-    var memes = [Meme]()
+    var memes = [Meme]()  // Create a variable as an array of Meme struct's instances.
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
